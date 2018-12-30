@@ -37,3 +37,26 @@ def tile_to_lonlat(X, Y, zoom):
     lat_rad = math.atan(math.sinh(math.pi * (1 - 2 * Y / n)))
     lat_deg = math.degrees(lat_rad)
     return (lon_deg, lat_deg)
+
+def bbox_to_tiles(min_lon, min_lat, max_lon, max_lat, zoom):
+    '''
+    Find the map tiles at the requested zoom level that cover a rectangular
+    bounding box.
+
+    Arguments:
+    min_lon, min_lat, max_lon, max_lat - the minimum and maximum longitude and latitude
+        extents of the bounding box
+    zoom - The map tile zoom level for which to calculate the covering tiles
+
+    Returns:
+    A list of (zoom, X, Y) tuples for the map tiles
+    '''
+    lower_left_tile = lonlat_to_tile(min_lon, min_lat, zoom)
+    upper_right_tile = lonlat_to_tile(max_lon, max_lat, zoom)
+
+    tiles = []
+    for X in range(lower_left_tile[0], upper_right_tile[0] + 1):
+        for Y in range(upper_right_tile[1], lower_left_tile[1] + 1):
+            tiles.append((zoom, X, Y))
+
+    return tiles
