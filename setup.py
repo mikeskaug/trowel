@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='trowel',
-    version='0.0.1',
+    version='0.1.0',
     author='Mike Skaug',
     author_email='mike.skaug@gmail.com',
     description='Utilities for finding, getting and parsing web map tiles.',
